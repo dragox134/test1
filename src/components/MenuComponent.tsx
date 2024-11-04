@@ -18,8 +18,16 @@ const MenuComponent: React.FC = () => {
 
   return (
     <div>
-      <Button onClick={handleClick}>Menu</Button>
+      <Button
+        aria-controls={anchorEl ? 'menu-appbar' : undefined}
+        aria-haspopup="true"
+        onClick={handleClick}
+        color="inherit"
+      >
+        Menu
+      </Button>
       <Menu
+        id="menu-appbar"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
@@ -28,6 +36,7 @@ const MenuComponent: React.FC = () => {
         {session ? (
           <>
             <MenuItem onClick={() => { signOut(); handleClose(); }}>Sign Out</MenuItem>
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
           </>
         ) : (
           <MenuItem onClick={() => { signIn('google'); handleClose(); }}>Sign In</MenuItem>
